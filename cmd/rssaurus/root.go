@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/justinburdett/rssaurus-cli/internal/api"
 	"github.com/justinburdett/rssaurus-cli/internal/config"
 	"github.com/spf13/cobra"
 )
@@ -12,6 +13,7 @@ var (
 	flagHost   string
 	flagJSON   bool
 	cfgManager *config.Manager
+	apiClient  *api.Client
 )
 
 var rootCmd = &cobra.Command{
@@ -35,6 +37,8 @@ var rootCmd = &cobra.Command{
 			cfgManager.SetToken(os.Getenv("RSSAURUS_TOKEN"))
 		}
 
+		apiClient = api.NewClient(cfgManager.Host(), cfgManager.Token())
+
 		return nil
 	},
 }
@@ -51,4 +55,11 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&flagJSON, "json", false, "output JSON")
 
 	rootCmd.AddCommand(authCmd)
+	rootCmd.AddCommand(feedsCmd)
+	rootCmd.AddCommand(itemsCmd)
+	rootCmd.AddCommand(readCmd)
+	rootCmd.AddCommand(unreadCmd)
+	rootCmd.AddCommand(markReadCmd)
+	rootCmd.AddCommand(saveCmd)
+	rootCmd.AddCommand(unsaveCmd)
 }

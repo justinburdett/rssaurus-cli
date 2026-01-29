@@ -32,8 +32,9 @@ Config file location:
 - `rssaurus auth login`
 - `rssaurus auth whoami`
 - `rssaurus feeds`
-- `rssaurus items` (unread by default; `--json` for scripting)
+- `rssaurus items` (unread by default; supports `--feed-id`, `--status`, `--limit`, `--cursor`)
 - `rssaurus read <id>` / `rssaurus unread <id>`
+- `rssaurus mark-read --all` (or `--ids 1,2,3`, optional `--feed-id`)
 - `rssaurus save <url>` / `rssaurus unsave <id>`
 
 ## Development
