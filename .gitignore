@@ -1,0 +1,9 @@
+# Go
+/bin/
+/dist/
+
+# Local config
+.rssaurus-cli.json
+
+# macOS
+.DS_Store
