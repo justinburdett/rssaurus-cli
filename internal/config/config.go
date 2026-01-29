@@ -35,6 +35,24 @@ func NewManager() (*Manager, error) {
 }
 
 func defaultConfigPath() (string, error) {
+	// Prefer XDG-style paths so users can predict where config is stored.
+	//
+	// On macOS, os.UserConfigDir() points to ~/Library/Application Support,
+	// which is fine, but many CLI users expect ~/.config.
+	//
+	// Order:
+	// 1) $XDG_CONFIG_HOME
+	// 2) ~/.config
+	// 3) os.UserConfigDir() fallback
+	if xdg := os.Getenv("XDG_CONFIG_HOME"); xdg != "" {
+		return filepath.Join(xdg, "rssaurus", "config.json"), nil
+	}
+
+	home, err := os.UserHomeDir()
+	if err == nil && home != "" {
+		return filepath.Join(home, ".config", "rssaurus", "config.json"), nil
+	}
+
 	dir, err := os.UserConfigDir()
 	if err != nil {
 		return "", err

@@ -23,6 +23,10 @@ For v1 we keep a single host/token.
 - Override host via `RSSAURUS_HOST` or `--host`
 - Provide token via `RSSAURUS_TOKEN` or store it locally via `rssaurus auth login`
 
+Config file location:
+- `$XDG_CONFIG_HOME/rssaurus/config.json` (if set)
+- otherwise `~/.config/rssaurus/config.json`
+
 ## Commands (planned MVP)
 
 - `rssaurus auth login`
