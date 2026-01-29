@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"strings"
 
+	"github.com/justinburdett/rssaurus-cli/internal/api"
 	"github.com/spf13/cobra"
 )
 
@@ -46,8 +47,31 @@ var authLoginCmd = &cobra.Command{
 	},
 }
 
+var authWhoamiCmd = &cobra.Command{
+	Use:   "whoami",
+	Short: "Verify the configured token by calling /api/v1/me",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if cfgManager.Token() == "" {
+			return fmt.Errorf("no token configured; run `rssaurus auth login` or set RSSAURUS_TOKEN")
+		}
+		var me api.Me
+		if err := apiClient.GetJSON(cmd.Context(), "/api/v1/me", &me); err != nil {
+			return err
+		}
+
+		if flagJSON {
+			fmt.Printf("{\"id\":%d,\"email\":%q}\n", me.ID, me.Email)
+			return nil
+		}
+
+		fmt.Printf("Logged in as %s\n", me.Email)
+		return nil
+	},
+}
+
 func init() {
 	authCmd.AddCommand(authLoginCmd)
+	authCmd.AddCommand(authWhoamiCmd)
 }
 
 func openBrowser(url string) error {
