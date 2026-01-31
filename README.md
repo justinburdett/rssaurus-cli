@@ -9,6 +9,9 @@ A command-line client for [RSSaurus](https://rssaurus.com).
 ```bash
 brew tap RSSaurus/tap
 brew install rssaurus
+
+# later
+brew upgrade rssaurus
 ```
 
 ### Quick install (macOS / Linux)
@@ -33,6 +36,12 @@ https://github.com/RSSaurus/rssaurus-cli/releases
 rssaurus auth login
 ```
 
+3. Verify:
+
+```bash
+rssaurus auth whoami
+```
+
 ## Configuration
 
 For v1 we keep a single host/token.
@@ -45,16 +54,20 @@ Config file location:
 - `$XDG_CONFIG_HOME/rssaurus/config.json` (if set)
 - otherwise `~/.config/rssaurus/config.json`
 
-## Commands (planned MVP)
+## Commands
 
 - `rssaurus auth login`
 - `rssaurus auth whoami`
-- `rssaurus feeds`
+- `rssaurus feeds` (default output does **not** include DB IDs)
 - `rssaurus items` (unread by default; supports `--feed-id`, `--status`, `--limit`, `--cursor`, `--urls`)
 - `rssaurus open <url>`
-- `rssaurus read <item-id>` / `rssaurus unread <item-id>` (IDs available via `--json` output)
+- `rssaurus read <item-id>` / `rssaurus unread <item-id>`
 - `rssaurus mark-read --all` (or `--ids 1,2,3`, optional `--feed-id`)
-- `rssaurus save <url>` / `rssaurus unsave <saved-item-id>` (IDs available via `--json` output)
+- `rssaurus save <url>` / `rssaurus unsave <saved-item-id>`
+
+Notes:
+- Use `--json` output when you need IDs for scripting.
+- When using the `--urls` flag, `items` prints only URLs (one per line) for easy piping.
 
 ## Install locally (dev)
 
