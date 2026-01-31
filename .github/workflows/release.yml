@@ -28,4 +28,6 @@ jobs:
           version: latest
           args: release --clean
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # To publish the Homebrew formula to RSSaurus/tap, set TAP_GITHUB_TOKEN
+          # in the RSSaurus/rssaurus-cli repo secrets (needs contents:write on RSSaurus/tap).
+          GITHUB_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
