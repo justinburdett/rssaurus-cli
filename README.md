@@ -4,7 +4,18 @@ A command-line client for [RSSaurus](https://rssaurus.com).
 
 ## Install
 
-(TODO) GitHub Releases will provide prebuilt binaries for macOS/Linux/Windows.
+### Quick install (macOS / Linux)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/justinburdett/rssaurus-cli/main/install.sh | bash
+```
+
+Installs `rssaurus` into `/usr/local/bin` (uses `sudo` if needed).
+
+### Manual install
+
+Download a binary from GitHub Releases:
+https://github.com/justinburdett/rssaurus-cli/releases
 
 ## Quick start
 
