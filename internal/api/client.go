@@ -2,6 +2,8 @@ package api
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -19,6 +21,15 @@ type Client struct {
 type APIError struct {
 	Error        string `json:"error"`
 	MissingScope string `json:"missing_scope"`
+}
+
+func randomIdempotencyKey() string {
+	b := make([]byte, 16)
+	if _, err := rand.Read(b); err != nil {
+		// Extremely unlikely; fall back to a time-based value.
+		return fmt.Sprintf("t-%d", time.Now().UnixNano())
+	}
+	return hex.EncodeToString(b)
 }
 
 func NewClient(baseURL, token string) *Client {
@@ -60,6 +71,10 @@ func (c *Client) doJSON(ctx context.Context, method, path string, in any, out an
 	}
 	if c.token != "" {
 		req.Header.Set("Authorization", "Bearer "+c.token)
+	}
+	// Write endpoints support Idempotency-Key; always sending it makes retries safe.
+	if method != http.MethodGet {
+		req.Header.Set("Idempotency-Key", randomIdempotencyKey())
 	}
 	req.Header.Set("Accept", "application/json")
 	if in != nil {
