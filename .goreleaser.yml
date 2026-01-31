@@ -34,6 +34,28 @@ checksum:
 release:
   draft: false
 
+brews:
+  - name: rssaurus
+    description: "RSSaurus command-line client"
+    homepage: "https://rssaurus.com"
+    license: "MIT"
+
+    # Where to publish the formula
+    repository:
+      owner: RSSaurus
+      name: tap
+
+    directory: Formula
+
+    # The executable name
+    install: |
+      bin.install "rssaurus"
+
+    # Make formula updates deterministic
+    commit_author:
+      name: RSSaurus Bot
+      email: bot@rssaurus.com
+
 changelog:
   sort: asc
   filters:

@@ -4,6 +4,13 @@ A command-line client for [RSSaurus](https://rssaurus.com).
 
 ## Install
 
+### Homebrew (recommended)
+
+```bash
+brew tap RSSaurus/tap
+brew install rssaurus
+```
+
 ### Quick install (macOS / Linux)
 
 ```bash
@@ -15,7 +22,7 @@ Installs `rssaurus` into `/usr/local/bin` (uses `sudo` if needed).
 ### Manual install
 
 Download a binary from GitHub Releases:
-https://github.com/justinburdett/rssaurus-cli/releases
+https://github.com/RSSaurus/rssaurus-cli/releases
 
 ## Quick start
 
