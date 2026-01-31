@@ -44,6 +44,9 @@ brews:
     repository:
       owner: RSSaurus
       name: tap
+      # Use a dedicated token for the tap repo (GitHub Actions' GITHUB_TOKEN
+      # can't write to a different repo).
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
 
     directory: Formula
 
