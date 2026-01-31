@@ -16,6 +16,7 @@ var (
 	itemsStatus string
 	itemsLimit  int
 	itemsCursor string
+	itemsURLs   bool
 )
 
 var itemsCmd = &cobra.Command{
@@ -52,6 +53,16 @@ var itemsCmd = &cobra.Command{
 			return output.PrintJSON(os.Stdout, resp)
 		}
 
+		if itemsURLs {
+			for _, it := range resp.Items {
+				if it.URL != "" {
+					fmt.Fprintln(os.Stdout, it.URL)
+				}
+			}
+			// No cursor printing in --urls mode (keeps piping clean).
+			return nil
+		}
+
 		tw := output.NewTabWriter(os.Stdout)
 		defer tw.Flush()
 
@@ -86,4 +97,5 @@ func init() {
 	itemsCmd.Flags().StringVar(&itemsStatus, "status", "unread", "status filter: unread|read|all")
 	itemsCmd.Flags().IntVar(&itemsLimit, "limit", 50, "items per page (max 200)")
 	itemsCmd.Flags().StringVar(&itemsCursor, "cursor", "", "pagination cursor")
+	itemsCmd.Flags().BoolVar(&itemsURLs, "urls", false, "print only item URLs (one per line)")
 }
