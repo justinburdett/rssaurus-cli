@@ -57,6 +57,7 @@ func init() {
 	rootCmd.AddCommand(authCmd)
 	rootCmd.AddCommand(feedsCmd)
 	rootCmd.AddCommand(itemsCmd)
+	rootCmd.AddCommand(openCmd)
 	rootCmd.AddCommand(readCmd)
 	rootCmd.AddCommand(unreadCmd)
 	rootCmd.AddCommand(markReadCmd)

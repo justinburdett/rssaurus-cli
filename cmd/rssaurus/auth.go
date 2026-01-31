@@ -4,11 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"os/exec"
-	"runtime"
 	"strings"
 
 	"github.com/justinburdett/rssaurus-cli/internal/api"
+	"github.com/justinburdett/rssaurus-cli/internal/platform"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +21,7 @@ var authLoginCmd = &cobra.Command{
 	Short: "Open RSSaurus token creation page, then save a token locally",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		createURL := "https://rssaurus.com/api_tokens/new"
-		_ = openBrowser(createURL)
+		_ = platform.OpenURL(createURL)
 
 		fmt.Fprintf(os.Stderr, "Opened: %s\n", createURL)
 		fmt.Fprint(os.Stderr, "Paste your API token: ")
@@ -54,12 +53,14 @@ var authWhoamiCmd = &cobra.Command{
 		if cfgManager.Token() == "" {
 			return fmt.Errorf("no token configured; run `rssaurus auth login` or set RSSAURUS_TOKEN")
 		}
+
 		var me api.Me
 		if err := apiClient.GetJSON(cmd.Context(), "/api/v1/me", &me); err != nil {
 			return err
 		}
 
 		if flagJSON {
+			// IDs are included in JSON output for scripting/debugging.
 			fmt.Printf("{\"id\":%d,\"email\":%q}\n", me.ID, me.Email)
 			return nil
 		}
@@ -72,19 +73,4 @@ var authWhoamiCmd = &cobra.Command{
 func init() {
 	authCmd.AddCommand(authLoginCmd)
 	authCmd.AddCommand(authWhoamiCmd)
-}
-
-func openBrowser(url string) error {
-	var cmd *exec.Cmd
-	switch runtime.GOOS {
-	case "darwin":
-		cmd = exec.Command("open", url)
-	case "linux":
-		cmd = exec.Command("xdg-open", url)
-	case "windows":
-		cmd = exec.Command("rundll32", "url.dll,FileProtocolHandler", url)
-	default:
-		return fmt.Errorf("unsupported platform: %s", runtime.GOOS)
-	}
-	return cmd.Start()
 }
