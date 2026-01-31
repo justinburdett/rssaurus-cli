@@ -33,9 +33,9 @@ Config file location:
 - `rssaurus auth whoami`
 - `rssaurus feeds`
 - `rssaurus items` (unread by default; supports `--feed-id`, `--status`, `--limit`, `--cursor`)
-- `rssaurus read <id>` / `rssaurus unread <id>`
+- `rssaurus read <item-id>` / `rssaurus unread <item-id>` (IDs available via `--json` output)
 - `rssaurus mark-read --all` (or `--ids 1,2,3`, optional `--feed-id`)
-- `rssaurus save <url>` / `rssaurus unsave <id>`
+- `rssaurus save <url>` / `rssaurus unsave <saved-item-id>` (IDs available via `--json` output)
 
 ## Development
 

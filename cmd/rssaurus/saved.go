@@ -35,7 +35,7 @@ var saveCmd = &cobra.Command{
 		if flagJSON {
 			return output.PrintJSON(os.Stdout, resp)
 		}
-		fmt.Printf("Saved: %s (id=%d)\n", resp.URL, resp.ID)
+		fmt.Printf("Saved: %s\n", resp.URL)
 		return nil
 	},
 }
@@ -56,7 +56,7 @@ var unsaveCmd = &cobra.Command{
 			fmt.Fprintln(os.Stdout, "{}")
 			return nil
 		}
-		fmt.Printf("Unsaved: %d\n", id)
+		fmt.Println("Unsaved.")
 		return nil
 	},
 }

@@ -55,7 +55,7 @@ var itemsCmd = &cobra.Command{
 		tw := output.NewTabWriter(os.Stdout)
 		defer tw.Flush()
 
-		fmt.Fprintln(tw, "ID\tSTATUS\tPUBLISHED\tFEED\tTITLE\tURL")
+		fmt.Fprintln(tw, "STATUS\tPUBLISHED\tFEED\tTITLE\tURL")
 		for _, it := range resp.Items {
 			status := "unread"
 			if it.ReadAt != nil {
@@ -65,13 +65,12 @@ var itemsCmd = &cobra.Command{
 			if it.PublishedAt != nil {
 				published = it.PublishedAt.Local().Format("2006-01-02")
 			}
-			fmt.Fprintf(tw, "%d\t%s\t%s\t%s\t%s\t%s\n",
-				it.ID,
+			fmt.Fprintf(tw, "%s\t%s\t%s\t%s\t%s\n",
 				status,
 				published,
 				output.Trunc(it.FeedTitle, 24),
 				output.Trunc(it.Title, 70),
-				output.Trunc(it.URL, 60),
+				output.Trunc(it.URL, 70),
 			)
 		}
 

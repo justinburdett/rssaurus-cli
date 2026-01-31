@@ -53,7 +53,7 @@ var markReadCmd = &cobra.Command{
 		if flagJSON {
 			return output.PrintJSON(os.Stdout, resp)
 		}
-		fmt.Printf("Updated %d items\n", resp.Updated)
+		fmt.Printf("Updated %d item(s)\n", resp.Updated)
 		return nil
 	},
 }

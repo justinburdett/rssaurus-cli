@@ -25,9 +25,9 @@ var feedsCmd = &cobra.Command{
 		tw := output.NewTabWriter(os.Stdout)
 		defer tw.Flush()
 
-		fmt.Fprintln(tw, "ID\tUNREAD\tTITLE\tFEED_URL")
+		fmt.Fprintln(tw, "UNREAD\tTITLE\tFEED_URL")
 		for _, f := range resp.Feeds {
-			fmt.Fprintf(tw, "%d\t%d\t%s\t%s\n", f.ID, f.UnreadCount, output.Trunc(f.Title, 60), output.Trunc(f.FeedURL, 80))
+			fmt.Fprintf(tw, "%d\t%s\t%s\n", f.UnreadCount, output.Trunc(f.Title, 60), output.Trunc(f.FeedURL, 80))
 		}
 		return nil
 	},

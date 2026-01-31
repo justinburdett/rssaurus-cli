@@ -26,7 +26,7 @@ var readCmd = &cobra.Command{
 		if flagJSON {
 			return output.PrintJSON(os.Stdout, resp)
 		}
-		fmt.Printf("Marked read: %d\n", resp.ID)
+		fmt.Println("Marked read.")
 		return nil
 	},
 }
@@ -47,7 +47,7 @@ var unreadCmd = &cobra.Command{
 		if flagJSON {
 			return output.PrintJSON(os.Stdout, resp)
 		}
-		fmt.Printf("Marked unread: %d\n", resp.ID)
+		fmt.Println("Marked unread.")
 		return nil
 	},
 }
