@@ -5,7 +5,7 @@ set -euo pipefail
 # - Downloads the latest GitHub release asset for your OS/arch
 # - Installs `rssaurus` into /usr/local/bin (or $INSTALL_DIR)
 
-REPO="justinburdett/rssaurus-cli"
+REPO="RSSaurus/rssaurus-cli"
 INSTALL_DIR="${INSTALL_DIR:-/usr/local/bin}"
 
 need() {

@@ -7,7 +7,7 @@ A command-line client for [RSSaurus](https://rssaurus.com).
 ### Quick install (macOS / Linux)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/justinburdett/rssaurus-cli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/RSSaurus/rssaurus-cli/main/install.sh | bash
 ```
 
 Installs `rssaurus` into `/usr/local/bin` (uses `sudo` if needed).
