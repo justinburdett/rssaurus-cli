@@ -1,4 +1,4 @@
-package rssaurus
+package main
 
 import (
 	"fmt"

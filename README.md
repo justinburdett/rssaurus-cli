@@ -38,6 +38,19 @@ Config file location:
 - `rssaurus mark-read --all` (or `--ids 1,2,3`, optional `--feed-id`)
 - `rssaurus save <url>` / `rssaurus unsave <saved-item-id>` (IDs available via `--json` output)
 
+## Install locally (dev)
+
+```bash
+# Installs a `rssaurus` binary into ~/go/bin
+
+go install ./cmd/rssaurus
+
+# Ensure ~/go/bin is in PATH
+export PATH="$PATH:$HOME/go/bin"
+
+rssaurus --help
+```
+
 ## Development
 
 ```bash
