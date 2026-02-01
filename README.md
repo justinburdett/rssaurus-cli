@@ -62,7 +62,7 @@ Config file location:
 - `rssaurus items` (unread by default; supports `--feed-id`, `--status`, `--limit`, `--cursor`, `--urls`)
 - `rssaurus open <url>`
 - `rssaurus read <item-id>` / `rssaurus unread <item-id>`
-- `rssaurus mark-read --all` (or `--ids 1,2,3`, optional `--feed-id`)
+- `rssaurus mark-read --all` (or `--ids 1,2,3`, `--url <url>`, `--urls <u1,u2>`, optional `--feed-id`)
 - `rssaurus save <url>` / `rssaurus unsave <saved-item-id>`
 
 Notes:

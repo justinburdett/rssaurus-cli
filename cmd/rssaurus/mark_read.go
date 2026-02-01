@@ -15,6 +15,8 @@ var (
 	markReadAll    bool
 	markReadFeedID int64
 	markReadIDs    string
+	markReadURL    string
+	markReadURLs   string
 )
 
 var markReadCmd = &cobra.Command{
@@ -42,8 +44,21 @@ var markReadCmd = &cobra.Command{
 				ids = append(ids, id)
 			}
 			payload["ids"] = ids
+		} else if strings.TrimSpace(markReadURL) != "" {
+			payload["url"] = strings.TrimSpace(markReadURL)
+		} else if strings.TrimSpace(markReadURLs) != "" {
+			parts := strings.Split(markReadURLs, ",")
+			urls := make([]string, 0, len(parts))
+			for _, p := range parts {
+				p = strings.TrimSpace(p)
+				if p == "" {
+					continue
+				}
+				urls = append(urls, p)
+			}
+			payload["urls"] = urls
 		} else {
-			return fmt.Errorf("provide either --all or --ids")
+			return fmt.Errorf("provide one of --all, --ids, --url, or --urls")
 		}
 
 		var resp api.MarkReadResponse
@@ -62,4 +77,6 @@ func init() {
 	markReadCmd.Flags().BoolVar(&markReadAll, "all", false, "mark all items as read (optionally filtered by --feed-id)")
 	markReadCmd.Flags().Int64Var(&markReadFeedID, "feed-id", 0, "filter by feed id")
 	markReadCmd.Flags().StringVar(&markReadIDs, "ids", "", "comma-separated item ids")
+	markReadCmd.Flags().StringVar(&markReadURL, "url", "", "mark the item with this URL as read")
+	markReadCmd.Flags().StringVar(&markReadURLs, "urls", "", "comma-separated URLs to mark as read")
 }
